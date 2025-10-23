@@ -45,6 +45,10 @@ public class InputParser {
             if (s.length() > 5) {
                 throw new IllegalArgumentException("이름은 5자 이하여야 합니다");
             }
+
+            if (!s.matches("[0-9a-zA-Z]+")) {
+                throw new IllegalArgumentException("이름은 영어와 숫자로만 이루어질 수 있습니다");
+            }
         }
 
         return names;
