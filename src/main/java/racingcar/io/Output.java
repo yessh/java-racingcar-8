@@ -1,20 +1,23 @@
 package racingcar.io;
 
 import racingcar.domain.Car;
+import racingcar.domain.Running;
 
 import java.util.List;
 
 public class Output {
 
-    public void printGame(List<Car> cars) {
 
+    public void printGame(List<Car> cars, int count) {
         System.out.println("실행 결과");
 
-        printRace(cars);
+        while (count-- > 0) {
+            printRace(cars, count);
+        }
     }
 
-    public void printWinners(List<String> winners) {
 
+    public void printWinners(List<String> winners) {
         System.out.print("최종 우승자 : ");
 
         if (winners.size() > 1) {
@@ -28,7 +31,10 @@ public class Output {
     }
 
 
-    private void printRace(List<Car> cars) {
+    private void printRace(List<Car> cars, int count) {
+        Running running = new Running();
+        running.moveCar(cars);
+
         for (Car car : cars) {
             String nowPosition = "-".repeat(car.getPosition());
 

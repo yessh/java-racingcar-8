@@ -6,13 +6,10 @@ import java.util.List;
 public class Running {
 
 
-    public void moveCar(List<Car> cars, int count) {
+    public void moveCar(List<Car> cars) {
 
-        while (count-- > 0) {
-
-            for (Car car : cars) {
-                car.move();
-            }
+        for (Car car : cars) {
+            car.move();
         }
     }
 
