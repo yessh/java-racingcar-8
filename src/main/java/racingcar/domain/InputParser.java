@@ -33,7 +33,7 @@ public class InputParser {
 
     private String[] validateInputString(String input) {
         String regex = "^(.+)(\\s*,\\s*(.+))*$";
-        String separatorRegex = "//s*,//s*";
+        String separatorRegex = "\\s*,\\s*";
 
         Matcher inputMatcher = Pattern.compile(regex).matcher(input);
         if (!inputMatcher.matches()) {
