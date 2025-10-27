@@ -32,7 +32,7 @@ class InputParserTest {
         // then
         assertThatThrownBy(() -> inputParser.parse(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("이름은 영어와 숫자로만 이루어질 수 있습니다");
+                .hasMessage("이름은 알파벳과 숫자로만 이루어질 수 있습니다");
     }
 
 }

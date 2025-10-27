@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 public class Car {
 
-    private String name;
+    private final String name;
     private int position;
 
 
@@ -17,7 +17,7 @@ public class Car {
     }
 
     // 생성자
-    public Car(String name, int position) {
+    public Car(String name) {
         this.name = name;
         this.position = 0;
     }
