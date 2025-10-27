@@ -2,6 +2,7 @@ package racingcar.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.io.InputParser;
 
 import java.util.List;
 
@@ -33,6 +34,20 @@ class InputParserTest {
         assertThatThrownBy(() -> inputParser.parse(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("이름은 알파벳과 숫자로만 이루어질 수 있습니다");
+    }
+
+
+    @DisplayName("이름 5자 넘길 시 예외발생")
+    @Test
+    void validateInvalidParse2() {
+        // given
+        String input = "abcdef";
+
+        // when
+        // then
+        assertThatThrownBy(() -> inputParser.parse(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("이름은 5자 이하여야 합니다");
     }
 
 }

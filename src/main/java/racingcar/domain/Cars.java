@@ -1,18 +1,25 @@
 package racingcar.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Cars {
 
-    private List<Car> cars = new ArrayList<>();
+    private final List<Car> cars;
 
-    public void makeCars(List<String> carNames) {
+    public static Cars of(List<String> carNames) {
 
-        for (String carName : carNames) {
-            Car car = new Car(carName);
-            cars.add(car);
-        }
+        List<Car> carList = carNames.stream()
+                .map(Car::new)
+                .collect(Collectors.toList());
+
+        return new Cars(carList);
+    }
+
+    private Cars(List<Car> cars) {
+        this.cars = cars;
     }
 
     public void moveAll() {
@@ -21,26 +28,26 @@ public class Cars {
         }
     }
 
-    public List<String> parseWinner() {
+    public List<Car> findWinner() {
 
-        List<String> winners = new ArrayList<>();
-        int maxPosition = 0;
+        int maxPosition = findMaxPosition();
 
-        for (Car car : cars) {
-            if (car.getPosition() > maxPosition) {
-                maxPosition = car.getPosition();
-                winners.clear();
-                winners.add(car.getName());
-            } else if (car.getPosition() == maxPosition) {
-                winners.add(car.getName());
-            }
-        }
+        List<Car> winners = cars.stream()
+                .filter(car -> car.getPosition() == maxPosition)
+                .collect(Collectors.toList());
 
-        return winners;
+        return Collections.unmodifiableList(winners);
+    }
+
+    private int findMaxPosition() {
+        return cars.stream()
+                .mapToInt(Car::getPosition)
+                .max()
+                .orElse(0);
     }
 
 
     public List<Car> getCars() {
-        return cars;
+        return Collections.unmodifiableList(cars);
     }
 }

@@ -1,39 +1,19 @@
 package racingcar.io;
 
 import racingcar.domain.Car;
-import racingcar.domain.Running;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Output {
 
 
-    public void printGame(List<Car> cars, int count) {
+    public void printGame() {
         System.out.println("실행 결과");
 
-        while (count-- > 0) {
-            printRace(cars, count);
-        }
     }
 
-
-    public void printWinners(List<String> winners) {
-        System.out.print("최종 우승자 : ");
-
-        if (winners.size() > 1) {
-            System.out.print(winners.get(0));
-            for (int i = 1; i < winners.size(); i++) {
-                System.out.print(", " + winners.get(i));
-            }
-        } else {
-            System.out.print(winners.get(0));
-        }
-    }
-
-
-    private void printRace(List<Car> cars, int count) {
-        Running running = new Running();
-        running.moveCar(cars);
+    public void printRound(List<Car> cars) {
 
         for (Car car : cars) {
             String nowPosition = "-".repeat(car.getPosition());
@@ -43,5 +23,17 @@ public class Output {
 
         System.out.println();
     }
+
+
+    public void printWinners(List<Car> winners) {
+        System.out.print("최종 우승자 : ");
+
+        String winnerNames = winners.stream()
+                .map(Car::getName)
+                .collect(Collectors.joining(", "));
+
+        System.out.println(winnerNames);
+    }
+
 
 }
